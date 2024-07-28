@@ -1,6 +1,9 @@
 from icecream import ic
 from enum import Enum, auto
 
+class Banana:
+	calorias = 45345
+
 
 """
 igual o mayor a 4 final. no hay promocion.

@@ -10,7 +10,7 @@ si la nota del promedio de los dos parciales es mayor 8:
 	parcial = 1 tema.
 
 -si la nota del promedio 
-
+ajhkajakjhfadiufhakjfh
 
 dos parciales
 	un parcial tiene 8 temas

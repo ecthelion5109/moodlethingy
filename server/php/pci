@@ -1,4 +1,4 @@
-#!C:\Users\Administrator\Desktop\MoodleWindowsInstaller-latest\server\php\.\php.exe
+#!C:\moodlethingy\server\php\.\php.exe
 <?php
 /**
  * Get the Compatibility info from PHP CLI

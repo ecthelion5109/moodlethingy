@@ -147,6 +147,7 @@ $string['csvdownload'] = 'Descargar en formato de hoja de cálculo (UTF-8.csv)';
 $string['datepassed'] = 'Fecha pasada';
 $string['days'] = 'Días';
 $string['daysoftotal'] = '{$a->days} de {$a->total}';
+$string['daystakingcourse'] = 'Días de curso';
 $string['daysuntilcompletion'] = 'Días para finalización';
 $string['defaultactivitycompletioncourse'] = 'Estas son las condiciones de finalización por defecto para las actividades de este curso.';
 $string['defaultactivitycompletionsite'] = 'Estas son las condiciones de finalización por defecto para las actividades de todos los cursos.';

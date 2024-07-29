@@ -1,4 +1,4 @@
-DIR = C:\Users\Administrator\Desktop\MoodleWindowsInstaller-latest\server
+DIR = C:\moodlethingy\server
 xampp = ?.?.?
 server = 1.8.0
 perl = 0

@@ -27,11 +27,10 @@ public:
     bool desaprobado;
 
     // Default constructor. to instance empty
-    TemaDeParcial() : name(""), nota(E), aprobado(false), desaprobado(true) {}
+    // TemaDeParcial() : name(""), nota(E), aprobado(false), desaprobado(true) {}
+	// ya no hace flata
 	
-	TemaDeParcial( string name, NotaEnLetra nota){
-		this->name = name;
-		this->nota = nota;
+	TemaDeParcial( string name, NotaEnLetra nota): name(name), nota(nota){
 		aprobado = this->nota > NotaEnLetra::D;
 		desaprobado = !aprobado;
 	} // funciones no llevan ;
@@ -47,9 +46,7 @@ class Parcial {
 	int n_desaprobados;
 	int n_aprobados;
 	
-	Parcial(string temario, TemaDeParcial temasdeparcial[8]){
-		this->temario = temario;
-		
+	Parcial(string temario, TemaDeParcial temasdeparcial[8]): temario(temario){
         // Separar aprobados y desaprobados counts
 		n_desaprobados = 0;
 		for ( int i = 0; i < 8; i++ ) {

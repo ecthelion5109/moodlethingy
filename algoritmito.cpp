@@ -41,37 +41,37 @@ public:
 class Parcial {
   public:
 	string temario;
-	TemaDeParcial* temas_aprobados;
-	TemaDeParcial* temas_desaprobados;
+	TemaDeParcial** temas_aprobados;
+	TemaDeParcial** temas_desaprobados;
 	int nota;
 	int n_desaprobados;
 	int n_aprobados;
 	
-	Parcial(string temario, TemaDeParcial temas_notas[8]){
+	Parcial(string temario, TemaDeParcial temasdeparcial[8]){
 		this->temario = temario;
 		
         // Separar aprobados y desaprobados counts
 		n_desaprobados = 0;
 		for ( int i = 0; i < 8; i++ ) {
-			if (temas_notas[i].desaprobado) {
+			if (temasdeparcial[i].desaprobado) {
 				n_desaprobados++;
 			}
 		}
 		n_aprobados = 8 - n_desaprobados;
 
 		// Allocate arrays based on counts
-		temas_desaprobados = new TemaDeParcial[n_desaprobados];
-		temas_aprobados = new TemaDeParcial[n_aprobados];
+		temas_desaprobados = new TemaDeParcial*[n_desaprobados];
+		temas_aprobados = new TemaDeParcial*[n_aprobados];
 
 
         // Llenar los arrays respectivamente		
         int desaprobados_index = 0;
         int aprobados_index = 0;
         for (int i = 0; i < 8; i++) {
-            if (temas_notas[i].desaprobado) {
-                temas_desaprobados[desaprobados_index++] = temas_notas[i];
+            if (temasdeparcial[i].desaprobado) {
+                temas_desaprobados[desaprobados_index++] = &temasdeparcial[i];
             } else {
-                temas_aprobados[aprobados_index++] = temas_notas[i];
+                temas_aprobados[aprobados_index++] = &temasdeparcial[i];
             }
         }
 		
@@ -119,18 +119,18 @@ class Alumno {
 
 		// Llenar my temas_desaprobados array
 		for (int i = 0; i < parcial1->n_desaprobados; i++ ) {
-			this->temas_desaprobados[i] = &(parcial1->temas_desaprobados[i]);
+			temas_desaprobados[i] = parcial1->temas_desaprobados[i];
 		}
 		for (int i = 0; i < parcial2->n_desaprobados; i++ ) {
-			this->temas_desaprobados[i+parcial1->n_desaprobados] = &(parcial2->temas_desaprobados[i]);
+			temas_desaprobados[i+parcial1->n_desaprobados] = parcial2->temas_desaprobados[i];
 		}
 		
 		// Llenar my temas_aprobados array
 		for (int i = 0; i < parcial1->n_aprobados; i++ ) {
-			this->temas_aprobados[i] = &(parcial1->temas_aprobados[i]);
+			temas_aprobados[i] = parcial1->temas_aprobados[i];
 		}
 		for (int i = 0; i < parcial2->n_aprobados; i++ ) {
-			this->temas_aprobados[i+parcial1->n_aprobados] = &(parcial2->temas_aprobados[i]);
+			temas_aprobados[i+parcial1->n_aprobados] = parcial2->temas_aprobados[i];
 		}
 		
 		// averiguar si promociona
@@ -211,7 +211,7 @@ class Alumno {
 
 int main() {
 	// primer parcial: 8 temas
-	TemaDeParcial parcial1_temas[8] = {
+	TemaDeParcial temasdeparcial1[8] = {
 		TemaDeParcial("tema1", NotaEnLetra::D),
 		TemaDeParcial("tema2", NotaEnLetra::A),
 		TemaDeParcial("tema3", NotaEnLetra::A),
@@ -221,10 +221,10 @@ int main() {
 		TemaDeParcial("tema7", NotaEnLetra::B),
 		TemaDeParcial("tema8", NotaEnLetra::D)
 	};
-	Parcial parcial1("Estadistica 1", parcial1_temas);
+	Parcial parcial1("Estadistica 1", temasdeparcial1);
 	
 	// segundo parcial: 8 temas
-	TemaDeParcial parcial2_temas[8] = {
+	TemaDeParcial temasdeparcial2[8] = {
 		TemaDeParcial("tema1", NotaEnLetra::D),
 		TemaDeParcial("tema2", NotaEnLetra::A),
 		TemaDeParcial("tema3", NotaEnLetra::A),
@@ -234,7 +234,7 @@ int main() {
 		TemaDeParcial("tema7", NotaEnLetra::A),
 		TemaDeParcial("tema8", NotaEnLetra::A)
 	};
-	Parcial parcial2("Estadistica 2", parcial2_temas);
+	Parcial parcial2("Estadistica 2", temasdeparcial2);
 	
 	// instace alumnito
 	Alumno alumno1("Alex", &parcial1, &parcial2);

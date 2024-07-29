@@ -20,12 +20,13 @@ enum NotaEnLetra {
 
 //-------------------------ok.Parcial-----------------------//
 class TemaDeParcial {
-  public:
+public:
     string name;
     NotaEnLetra nota;
     bool aprobado;
     bool desaprobado;
-	TemaDeParcial ( string name, NotaEnLetra nota){
+	
+	TemaDeParcial( string name, NotaEnLetra nota){
 		this->name = name;
 		this->nota = nota;
 		aprobado = this->nota > NotaEnLetra::D;
@@ -37,7 +38,6 @@ class TemaDeParcial {
 class Parcial {
   public:
 	string temario;
-    // TemaDeParcial* temas_notas[8];
 	TemaDeParcial* temas_aprobados;
 	TemaDeParcial* temas_desaprobados;
 	int nota;
@@ -46,10 +46,6 @@ class Parcial {
 	
 	Parcial(string temario, TemaDeParcial temas_notas[8]){
 		this->temario = temario;
-		// this->temas_notas = temas_notas;	// just save locally the direction, no need copy
-        // for (int i = 0; i < 8; i++) {
-            // this->temas_notas[i] = &temas_notas[i];
-        // }
 		
         // Separar aprobados y desaprobados counts
 		n_desaprobados = 0;
@@ -100,6 +96,8 @@ class Alumno {
 	TemaDeParcial* temas_desaprobados;
 	TemaDeParcial* temas_aprobados;
 	TemaDeParcial** temas_de_final; // Array of pointers to TemaDeParcial
+    int n_temas_de_final;
+
 	
   public:
 	Alumno( string name, Parcial* parcial1, Parcial* parcial2 )
@@ -126,11 +124,11 @@ class Alumno {
 		}
 		
 		// Llenar my temas_aprobados array
-		for (int i = 0; ; i < parcial1->n_desaprobados; i++ ) {
+		for (int i = 0; ; i < parcial1->n_aprobados; i++ ) {
 			this->temas_aprobados[i] = parcial1->temas_aprobados[i]
 		}
-		for (int i = 0; ; i < parcial2->n_desaprobados+i; i++ ) {
-			this->temas_aprobados[i+parcial1->n_desaprobados] = parcial2->temas_aprobados[i]
+		for (int i = 0; ; i < parcial2->n_aprobados+i; i++ ) {
+			this->temas_aprobados[i+parcial1->n_aprobados] = parcial2->temas_aprobados[i]
 		}
 		
 		// averiguar si promociona
@@ -141,7 +139,6 @@ class Alumno {
 				break;
 			}
 		}
-		
 		
 		
 		// averiguar la cantidad de temas para el final
@@ -178,29 +175,29 @@ class Alumno {
 		delete[] temas_de_final;
 	}
 	
-	void print() {
-		cout << "[Alumno " << name << "]" << endl;
-		cout << "Promedio: " << promedio << endl;
-		cout << "Recursa: " << (recursa ? "Si" : "No") << endl;
-		cout << "Promociona: " << (promociona ? "Si" : "No") << endl;
-		cout << "Numero de desaprobados: " << n_desaprobados << endl;
-		cout << "Numero de aprobados: " << n_aprobados << endl;
+	// void print() {
+		// cout << "[Alumno " << name << "]" << endl;
+		// cout << "Promedio: " << promedio << endl;
+		// cout << "Recursa: " << (recursa ? "Si" : "No") << endl;
+		// cout << "Promociona: " << (promociona ? "Si" : "No") << endl;
+		// cout << "Numero de desaprobados: " << n_desaprobados << endl;
+		// cout << "Numero de aprobados: " << n_aprobados << endl;
 
-		cout << "Temas desaprobados:" << endl;
-		for (int i = 0; i < n_desaprobados; i++) {
-			cout << temas_desaprobados[i].tema << " - Nota: " << temas_desaprobados[i].nota << endl;
-		}
+		// cout << "Temas desaprobados:" << endl;
+		// for (int i = 0; i < n_desaprobados; i++) {
+			// cout << temas_desaprobados[i].tema << " - Nota: " << temas_desaprobados[i].nota << endl;
+		// }
 
-		cout << "Temas aprobados:" << endl;
-		for (int i = 0; i < n_aprobados; i++) {
-			cout << temas_aprobados[i].tema << " - Nota: " << temas_aprobados[i].nota << endl;
-		}
+		// cout << "Temas aprobados:" << endl;
+		// for (int i = 0; i < n_aprobados; i++) {
+			// cout << temas_aprobados[i].tema << " - Nota: " << temas_aprobados[i].nota << endl;
+		// }
 
-		cout << "Temas para el final:" << endl;
-		for (int i = 0; temas_de_final != nullptr && temas_de_final[i] != nullptr; i++) {
-			cout << temas_de_final[i]->tema << " - Nota: " << temas_de_final[i]->nota << endl;
-		}
-	}
+		// cout << "Temas para el final:" << endl;
+		// for (int i = 0; temas_de_final != nullptr && temas_de_final[i] != nullptr; i++) {
+			// cout << temas_de_final[i]->tema << " - Nota: " << temas_de_final[i]->nota << endl;
+		// }
+	// }
 };
 
 
@@ -244,13 +241,13 @@ int main() {
 	
 	
 	// show his stuff thru his method
-	alumno1.print();
+	// alumno1.print();
 	
 	// Clean up dynamically allocated memory
-	for (int i = 0; i < 8; i++) {
-		delete parcial1_temas[i];
-		delete parcial2_temas[i];
-	}
+	// for (int i = 0; i < 8; i++) {
+		// delete parcial1_temas[i];
+		// delete parcial2_temas[i];
+	// }
 	
 	return 0;
 }

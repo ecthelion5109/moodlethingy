@@ -25,13 +25,16 @@ public:
     NotaEnLetra nota;
     bool aprobado;
     bool desaprobado;
+
+    // Default constructor. to instance empty
+    TemaDeParcial() : name(""), nota(E), aprobado(false), desaprobado(true) {}
 	
 	TemaDeParcial( string name, NotaEnLetra nota){
 		this->name = name;
 		this->nota = nota;
 		aprobado = this->nota > NotaEnLetra::D;
 		desaprobado = !aprobado;
-	};
+	} // funciones no llevan ;
 };
 
 //-------------------------ok.Parcial-----------------------//
@@ -99,10 +102,9 @@ class Alumno {
     int n_temas_de_final;
 
 	
-  public:
-	Alumno( string name, Parcial* parcial1, Parcial* parcial2 )
-		: (name(name), parcial1(parcial1), parcial2(parcial2)) {
-			
+  public:	// la lista de memeber instanciation no lleva parentesis
+	Alumno(string name, Parcial* parcial1, Parcial* parcial2): 
+		name(name), parcial1(parcial1), parcial2(parcial2) {
 		// sacar el promedio de parciales
 		promedio = (parcial1->nota + parcial2->nota) / 2.0;
 		recursa = (parcial1->nota < 4) || (parcial2->nota < 4);
@@ -116,19 +118,19 @@ class Alumno {
 		temas_aprobados = new TemaDeParcial[n_aprobados];
 
 		// Llenar my temas_desaprobados array
-		for (int i = 0; ; i < parcial1->n_desaprobados; i++ ) {
-			this->temas_desaprobados[i] = parcial1->temas_desaprobados[i]
+		for (int i = 0; i < parcial1->n_desaprobados; i++ ) {
+			this->temas_desaprobados[i] = parcial1->temas_desaprobados[i];
 		}
-		for (int i = 0; ; i < parcial2->n_desaprobados+i; i++ ) {
-			this->temas_desaprobados[i+parcial1->n_desaprobados] = parcial2->temas_desaprobados[i]
+		for (int i = 0; i < parcial2->n_desaprobados; i++ ) {
+			this->temas_desaprobados[i+parcial1->n_desaprobados] = parcial2->temas_desaprobados[i];
 		}
 		
 		// Llenar my temas_aprobados array
-		for (int i = 0; ; i < parcial1->n_aprobados; i++ ) {
-			this->temas_aprobados[i] = parcial1->temas_aprobados[i]
+		for (int i = 0; i < parcial1->n_aprobados; i++ ) {
+			this->temas_aprobados[i] = parcial1->temas_aprobados[i];
 		}
-		for (int i = 0; ; i < parcial2->n_aprobados+i; i++ ) {
-			this->temas_aprobados[i+parcial1->n_aprobados] = parcial2->temas_aprobados[i]
+		for (int i = 0; i < parcial2->n_aprobados; i++ ) {
+			this->temas_aprobados[i+parcial1->n_aprobados] = parcial2->temas_aprobados[i];
 		}
 		
 		// averiguar si promociona

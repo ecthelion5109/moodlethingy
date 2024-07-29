@@ -177,29 +177,28 @@ class Alumno {
 		delete[] temas_de_final;
 	}
 	
-	// void print() {
-		// cout << "[Alumno " << name << "]" << endl;
-		// cout << "Promedio: " << promedio << endl;
-		// cout << "Recursa: " << (recursa ? "Si" : "No") << endl;
-		// cout << "Promociona: " << (promociona ? "Si" : "No") << endl;
-		// cout << "Numero de desaprobados: " << n_desaprobados << endl;
-		// cout << "Numero de aprobados: " << n_aprobados << endl;
+	void print() {
+		cout << "[Alumno " << name << "]" << endl;
+		cout << "\t" << "Promedio: " << promedio << endl;
+		cout << "\t" << "Recursa: " << (recursa ? "Si" : "No") << endl;
+		cout << "\t" << "Promociona: " << (promociona ? "Si" : "No") << endl;
+		cout << "\t" << "Numero de desaprobados: " << n_desaprobados << endl;
+		cout << "\t" << "Numero de aprobados: " << n_aprobados << endl;
 
-		// cout << "Temas desaprobados:" << endl;
-		// for (int i = 0; i < n_desaprobados; i++) {
-			// cout << temas_desaprobados[i].tema << " - Nota: " << temas_desaprobados[i].nota << endl;
-		// }
-
-		// cout << "Temas aprobados:" << endl;
-		// for (int i = 0; i < n_aprobados; i++) {
-			// cout << temas_aprobados[i].tema << " - Nota: " << temas_aprobados[i].nota << endl;
-		// }
-
-		// cout << "Temas para el final:" << endl;
-		// for (int i = 0; temas_de_final != nullptr && temas_de_final[i] != nullptr; i++) {
-			// cout << temas_de_final[i]->tema << " - Nota: " << temas_de_final[i]->nota << endl;
-		// }
-	// }
+		cout << "\t" << "Temas desaprobados:" << endl;
+		for (int i = 0; i < n_desaprobados; i++) {
+			cout << "\t" << "\t" << temas_desaprobados[i].name << " - Nota: " << temas_desaprobados[i].nota << endl;
+		}
+	
+		cout << "\t" << "Temas para el final:" << endl;
+		if (n_temas_de_final){
+			for (int i = 0; i < n_temas_de_final; i++) {
+				cout << "\t" << "\t" << temas_de_final[i]->name << " - Nota: " << temas_de_final[i]->nota << endl;
+			}
+		} else {
+			cout << "\t" << "\t" << "Ninguno";
+		}
+	}
 };
 
 
@@ -217,10 +216,10 @@ int main() {
 		TemaDeParcial("tema2", NotaEnLetra::A),
 		TemaDeParcial("tema3", NotaEnLetra::A),
 		TemaDeParcial("tema4", NotaEnLetra::A),
-		TemaDeParcial("tema5", NotaEnLetra::A),
-		TemaDeParcial("tema6", NotaEnLetra::A),
-		TemaDeParcial("tema7", NotaEnLetra::A),
-		TemaDeParcial("tema8", NotaEnLetra::A)
+		TemaDeParcial("tema5", NotaEnLetra::C),
+		TemaDeParcial("tema6", NotaEnLetra::C),
+		TemaDeParcial("tema7", NotaEnLetra::B),
+		TemaDeParcial("tema8", NotaEnLetra::D)
 	};
 	Parcial parcial1("Estadistica 1", parcial1_temas);
 	
@@ -229,7 +228,7 @@ int main() {
 		TemaDeParcial("tema1", NotaEnLetra::D),
 		TemaDeParcial("tema2", NotaEnLetra::A),
 		TemaDeParcial("tema3", NotaEnLetra::A),
-		TemaDeParcial("tema4", NotaEnLetra::A),
+		TemaDeParcial("tema4", NotaEnLetra::C),
 		TemaDeParcial("tema5", NotaEnLetra::A),
 		TemaDeParcial("tema6", NotaEnLetra::A),
 		TemaDeParcial("tema7", NotaEnLetra::A),
@@ -237,19 +236,11 @@ int main() {
 	};
 	Parcial parcial2("Estadistica 2", parcial2_temas);
 	
-	
 	// instace alumnito
 	Alumno alumno1("Alex", &parcial1, &parcial2);
 	
-	
 	// show his stuff thru his method
-	// alumno1.print();
-	
-	// Clean up dynamically allocated memory
-	// for (int i = 0; i < 8; i++) {
-		// delete parcial1_temas[i];
-		// delete parcial2_temas[i];
-	// }
+	alumno1.print();
 	
 	return 0;
 }

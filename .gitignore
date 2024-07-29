@@ -1,6 +1,7 @@
+@*
 *.pyc
 *.rar
 *.bat
 *.sql
-@*
 *.cache
+*.zip

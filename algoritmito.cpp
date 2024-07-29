@@ -96,8 +96,8 @@ class Alumno {
 	bool promociona;
 	int n_desaprobados;
 	int n_aprobados;
-	TemaDeParcial* temas_desaprobados;
-	TemaDeParcial* temas_aprobados;
+	TemaDeParcial** temas_desaprobados;
+	TemaDeParcial** temas_aprobados;
 	TemaDeParcial** temas_de_final; // Array of pointers to TemaDeParcial
     int n_temas_de_final;
 
@@ -114,29 +114,29 @@ class Alumno {
 		n_aprobados = parcial1->n_aprobados + parcial2->n_aprobados;
 		
 		// Allocate arrays based on counts
-		temas_desaprobados = new TemaDeParcial[n_desaprobados];
-		temas_aprobados = new TemaDeParcial[n_aprobados];
+		temas_desaprobados = new TemaDeParcial*[n_desaprobados];
+		temas_aprobados = new TemaDeParcial*[n_aprobados];
 
 		// Llenar my temas_desaprobados array
 		for (int i = 0; i < parcial1->n_desaprobados; i++ ) {
-			this->temas_desaprobados[i] = parcial1->temas_desaprobados[i];
+			this->temas_desaprobados[i] = &(parcial1->temas_desaprobados[i]);
 		}
 		for (int i = 0; i < parcial2->n_desaprobados; i++ ) {
-			this->temas_desaprobados[i+parcial1->n_desaprobados] = parcial2->temas_desaprobados[i];
+			this->temas_desaprobados[i+parcial1->n_desaprobados] = &(parcial2->temas_desaprobados[i]);
 		}
 		
 		// Llenar my temas_aprobados array
 		for (int i = 0; i < parcial1->n_aprobados; i++ ) {
-			this->temas_aprobados[i] = parcial1->temas_aprobados[i];
+			this->temas_aprobados[i] = &(parcial1->temas_aprobados[i]);
 		}
 		for (int i = 0; i < parcial2->n_aprobados; i++ ) {
-			this->temas_aprobados[i+parcial1->n_aprobados] = parcial2->temas_aprobados[i];
+			this->temas_aprobados[i+parcial1->n_aprobados] = &(parcial2->temas_aprobados[i]);
 		}
 		
 		// averiguar si promociona
 		promociona = true;
 		for ( int i = 0; i < n_aprobados; i++ ) {
-			if (temas_aprobados[i].nota < NotaEnLetra::B){
+			if (temas_aprobados[i]->nota < NotaEnLetra::B){
 				promociona = false;
 				break;
 			}
@@ -162,10 +162,10 @@ class Alumno {
         temas_de_final = new TemaDeParcial*[n_temas_de_final];
         if (n_temas_de_final > 0) {
             if (n_desaprobados > 0 && promedio >= 8) {
-                temas_de_final[0] = &temas_desaprobados[0];
+                temas_de_final[0] = temas_desaprobados[0];
             } else {
                 for (int i = 0; i < n_temas_de_final; i++) {
-                    temas_de_final[i] = &temas_desaprobados[i];
+                    temas_de_final[i] = temas_desaprobados[i];
                 }
             }
         }
@@ -187,7 +187,7 @@ class Alumno {
 
 		cout << "\t" << "Temas desaprobados:" << endl;
 		for (int i = 0; i < n_desaprobados; i++) {
-			cout << "\t" << "\t" << temas_desaprobados[i].name << " - Nota: " << temas_desaprobados[i].nota << endl;
+			cout << "\t" << "\t" << temas_desaprobados[i]->name << " - Nota: " << temas_desaprobados[i]->nota << endl;
 		}
 	
 		cout << "\t" << "Temas para el final:" << endl;

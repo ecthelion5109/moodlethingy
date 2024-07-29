@@ -242,5 +242,9 @@ int main() {
 	// show his stuff thru his method
 	alumno1.print();
 	
+	// wait
+	cout << endl;
+	system("Pause");
+	
 	return 0;
 }
